@@ -314,9 +314,9 @@
 
 	<developers>
 		<developer>
-			<name>Nombre y Apellidos</name>
-			<id>***</id>
-			<email>***@alumnos.upm.es</email>
+			<name>Mona Mokhber</name>
+			<id>MMO</id>
+			<email>mona.mokhber@alumnos.upm.es</email>
 			<organization>MIW UPM</organization>
 			<roles>
 				<role>Architect</role>
