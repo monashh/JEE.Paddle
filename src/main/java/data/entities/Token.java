@@ -8,6 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 public class Token {
@@ -22,6 +24,10 @@ public class Token {
     @ManyToOne
     @JoinColumn
     private User user;
+    
+    
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date tokenCreationTime;
 
     public Token() {
     }
@@ -31,6 +37,7 @@ public class Token {
         this.user = user;
         this.value = new Encrypt().encryptInBase64UrlSafe("" + user.getId() + user.getUsername() + Long.toString(new Date().getTime())
                 + user.getPassword());
+        this.tokenCreationTime = new Date();
     }
 
     public int getId() {
@@ -43,6 +50,19 @@ public class Token {
 
     public User getUser() {
         return user;
+    }
+    
+    public Date getTokenCreationTime() {
+        return tokenCreationTime;
+    }
+    
+    public void setTokenCreationTime(Date tokenCreationTime) {
+        this.tokenCreationTime = tokenCreationTime;
+    }
+    
+    public boolean isTokenExpired(){
+    	long currentTime = System.currentTimeMillis(); 
+    	return ((currentTime - tokenCreationTime.getTime()) > 3600000); 
     }
 
     @Override
