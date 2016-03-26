@@ -7,6 +7,7 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.CredentialsExpiredException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,8 +17,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import data.daos.AuthorizationDao;
+import data.daos.TokenDao;
 import data.daos.UserDao;
 import data.entities.Role;
+import data.entities.Token;
 import data.entities.User;
 
 @Service
@@ -26,6 +29,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
     private UserDao userDao;
+    
+    @Autowired
+    private TokenDao tokenDao;
 
     @Autowired
     private AuthorizationDao authorizationDao;
@@ -34,8 +40,14 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     public UserDetails loadUserByUsername(final String usernameOrEmailOrTokenValue) throws UsernameNotFoundException {
         User user = userDao.findByTokenValue(usernameOrEmailOrTokenValue);
         if (user != null) {
-            List<Role> roleList = authorizationDao.findRoleByUser(user);
-            return this.userBuilder(user.getUsername(), new BCryptPasswordEncoder().encode(""), roleList);
+        	Token token = tokenDao.findByUserAndValue(user,usernameOrEmailOrTokenValue);
+        	if (!token.isTokenExpired()){
+        		List<Role> roleList = authorizationDao.findRoleByUser(user);
+                return this.userBuilder(user.getUsername(), new BCryptPasswordEncoder().encode(""), roleList);
+        	} else {
+                throw new CredentialsExpiredException("Token has expired");
+            }
+            
         } else {
             user = userDao.findByUsernameOrEmail(usernameOrEmailOrTokenValue);
             if (user != null) {
