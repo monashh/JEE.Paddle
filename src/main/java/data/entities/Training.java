@@ -11,62 +11,66 @@ import javax.persistence.ManyToMany;
 
 @Entity
 public class Training {
-	
-    @Id
-    @GeneratedValue
-    private int id;
 
-    private String trainer;
-    
-    private Calendar firtsClassDate;
-    
-    private Calendar lastClassDate;
+	@Id
+	@GeneratedValue
+	private int id;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    private List<User> userList;
+	private String trainerName;
 
-    public Training() {
-    }
+	private Calendar firtsClassDate;
 
-    public Training(User trainer, List<User> userList, Calendar firtsClassDate, Calendar lastClassDate) {
-        this.trainer = trainer.getUsername();
-        this.userList = userList;
-        this.firtsClassDate = firtsClassDate;
-        this.lastClassDate = lastClassDate;
-    }
+	private Calendar lastClassDate;
 
-    @Override
-    public String toString() {
-        return "Training [id=" + id + ", trainer=" + trainer + ", userList=" + userList + ", firtsClassDate=" + firtsClassDate + 
-        		", lastClassDate=" + lastClassDate + "]";
-    }
+	@ManyToMany(fetch = FetchType.EAGER)
+	private List<User> userList;
 
-    @Override
-    public int hashCode() {
-        return id;
-    }
+	public Training() {
+	}
 
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        } else if (getClass() != obj.getClass()) {
-            return false;
-        } else {
-            return id == ((Training) obj).id;
-        }
-    }
+	public Training(User trainer, List<User> userList, Calendar firtsClassDate, Calendar lastClassDate) {
+		this.trainerName = trainer.getUsername();
+		this.userList = userList;
+		this.firtsClassDate = firtsClassDate;
+		this.lastClassDate = lastClassDate;
+	}
 
-    public int getId() {
-        return id;
-    }
+	@Override
+	public String toString() {
+		return "Training [id=" + id + ", trainer=" + trainerName + ", userList=" + userList + ", firtsClassDate="
+				+ firtsClassDate + ", lastClassDate=" + lastClassDate + "]";
+	}
 
-    public String getTrainer() {
-        return trainer;
-    }
+	@Override
+	public int hashCode() {
+		return id;
+	}
 
-    public List<User> getUserList() {
-        return userList;
-    }
+	@Override
+	public boolean equals(Object obj) {
+		if (obj == null) {
+			return false;
+		} else if (getClass() != obj.getClass()) {
+			return false;
+		} else {
+			return id == ((Training) obj).id;
+		}
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public String getTrainerName() {
+		return trainerName;
+	}
+
+	public void setTrainerName(User trainer) {
+		this.trainerName = trainer.getUsername();
+	}
+
+	public List<User> getUserList() {
+		return userList;
+	}
 
 }

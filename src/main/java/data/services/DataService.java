@@ -7,6 +7,7 @@ import data.daos.AuthorizationDao;
 import data.daos.CourtDao;
 import data.daos.ReserveDao;
 import data.daos.TokenDao;
+import data.daos.TrainingDao;
 import data.daos.UserDao;
 
 @Service
@@ -30,13 +31,18 @@ public class DataService {
     @Autowired
     private UserDao userDao;
     
+    @Autowired
+    private TrainingDao trainingDao;
+    
 
     public void deleteAllExceptAdmin(){
         reserveDao.deleteAll();
         authorizationDao.deleteAll();
         tokenDao.deleteAll();
         courtDao.deleteAll();
+        trainingDao.deleteAll();
         userDao.deleteAll();
+        
         populate.createDefaultAdmin();
     }
 
