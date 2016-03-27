@@ -14,6 +14,8 @@ import javax.persistence.TemporalType;
 @Entity
 public class Token {
 
+	private final int EXPIRATION_TIME = 3600000;
+	
     @Id
     @GeneratedValue
     private int id;
@@ -62,7 +64,7 @@ public class Token {
     
     public boolean isTokenExpired(){
     	long currentTime = System.currentTimeMillis(); 
-    	return ((currentTime - tokenCreationTime.getTime()) > 3600000); 
+    	return ((currentTime - tokenCreationTime.getTime()) > EXPIRATION_TIME); 
     }
 
     @Override
