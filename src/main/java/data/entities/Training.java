@@ -1,5 +1,6 @@
 package data.entities;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -7,7 +8,9 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Training {
@@ -18,26 +21,31 @@ public class Training {
 
 	private String trainerName;
 
+	@ManyToOne
+    @JoinColumn
+    private User trainer;
+	
 	private Calendar firtsClassDate;
 
 	private Calendar lastClassDate;
 
 	@ManyToMany(fetch = FetchType.EAGER)
-	private List<User> userList;
+	private List<User> players;
 
 	public Training() {
 	}
 
-	public Training(User trainer, List<User> userList, Calendar firtsClassDate, Calendar lastClassDate) {
+	public Training(User trainer, Calendar firtsClassDate, Calendar lastClassDate) {
 		this.trainerName = trainer.getUsername();
-		this.userList = userList;
+		this.trainer = trainer;
+		this.players = new ArrayList<User>(4);
 		this.firtsClassDate = firtsClassDate;
 		this.lastClassDate = lastClassDate;
 	}
 
 	@Override
 	public String toString() {
-		return "Training [id=" + id + ", trainer=" + trainerName + ", userList=" + userList + ", firtsClassDate="
+		return "Training [id=" + id + ", trainer=" + trainerName + ", players=" + players + ", firtsClassDate="
 				+ firtsClassDate + ", lastClassDate=" + lastClassDate + "]";
 	}
 
@@ -69,8 +77,8 @@ public class Training {
 		this.trainerName = trainer.getUsername();
 	}
 
-	public List<User> getUserList() {
-		return userList;
+	public List<User> getPlayers() {
+		return players;
 	}
 
 }

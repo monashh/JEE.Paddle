@@ -1,7 +1,6 @@
 package data.daos;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
@@ -92,7 +91,7 @@ public class DaosService {
 				map.put("t" + token.getUser().getUsername(), token);
 			}
 			map.put(trainer.getUsername(), trainer);
-			trainingDao.save(new Training(trainer, Arrays.asList(trainers), firstClassDate, lastClassDate));
+			trainingDao.save(new Training(trainer, firstClassDate, lastClassDate));
 		}
 
 	}

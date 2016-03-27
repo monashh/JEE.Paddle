@@ -8,7 +8,7 @@ import data.entities.User;
 
 public interface TrainingDao extends JpaRepository<Training, Integer> {
 
-	@Query("select training.userList from Training training where training.trainerName = ?1")
+	@Query("select training.trainer from Training training where training.trainerName = ?1")
 	public User findByTrainerName(String trainerName);
 
 }
