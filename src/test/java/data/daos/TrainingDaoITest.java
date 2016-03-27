@@ -10,6 +10,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import config.PersistenceConfig;
 import config.TestsPersistenceConfig;
+import data.entities.Court;
 import data.entities.User;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -21,12 +22,22 @@ public class TrainingDaoITest {
 
 	@Autowired
 	private DaosService daosService;
+	
+	@Autowired
+    private CourtDao courtDao;
 
 	@Test
 	public void testFindByTrainerName() {
 
 		User trainer = (User) daosService.getMap().get("u9");
 		assertEquals(trainer, trainingDao.findByTrainerName("u9"));
+
+	}
+	
+	@Test
+	public void testFindTrainerByCourt() {
+		User trainer = (User) daosService.getMap().get("u9");
+		assertEquals(trainer, trainingDao.findTrainerByCourt(courtDao.findOne(4)));
 
 	}
 }

@@ -37,6 +37,5 @@ public class TokenDaoITest {
         Token token = (Token) daosService.getMap().get("tu1");
         assertEquals(token, tokenDao.findByUserAndValue(token.getUser(),token.getValue()));
     }
-    
 
 }

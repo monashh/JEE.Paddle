@@ -39,8 +39,8 @@ public class DataService {
         reserveDao.deleteAll();
         authorizationDao.deleteAll();
         tokenDao.deleteAll();
-        courtDao.deleteAll();
         trainingDao.deleteAll();
+        courtDao.deleteAll();
         userDao.deleteAll();
         
         populate.createDefaultAdmin();

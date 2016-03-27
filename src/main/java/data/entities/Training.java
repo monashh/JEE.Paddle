@@ -28,6 +28,10 @@ public class Training {
 	private Calendar firtsClassDate;
 
 	private Calendar lastClassDate;
+	
+	@ManyToOne
+    @JoinColumn
+    private Court court;
 
 	@ManyToMany(fetch = FetchType.EAGER)
 	private List<User> players;
@@ -35,18 +39,19 @@ public class Training {
 	public Training() {
 	}
 
-	public Training(User trainer, Calendar firtsClassDate, Calendar lastClassDate) {
+	public Training(User trainer, Calendar firtsClassDate, Calendar lastClassDate, Court court) {
 		this.trainerName = trainer.getUsername();
 		this.trainer = trainer;
-		this.players = new ArrayList<User>(4);
 		this.firtsClassDate = firtsClassDate;
 		this.lastClassDate = lastClassDate;
+		this.court = court;
+		this.players = new ArrayList<User>(4);
 	}
 
 	@Override
 	public String toString() {
-		return "Training [id=" + id + ", trainer=" + trainerName + ", players=" + players + ", firtsClassDate="
-				+ firtsClassDate + ", lastClassDate=" + lastClassDate + "]";
+		return "Training [id=" + id + ", trainerName=" + trainerName + ", trainer=" + trainer + ", court=" + court + 
+				", players=" + players + ", firtsClassDate=" + firtsClassDate + ", lastClassDate=" + lastClassDate + "]";
 	}
 
 	@Override
@@ -76,6 +81,10 @@ public class Training {
 	public void setTrainerName(User trainer) {
 		this.trainerName = trainer.getUsername();
 	}
+	
+	public Court getCourt() {
+        return court;
+    }
 
 	public List<User> getPlayers() {
 		return players;

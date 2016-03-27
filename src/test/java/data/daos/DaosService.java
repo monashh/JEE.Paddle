@@ -74,9 +74,7 @@ public class DaosService {
 		}
 		
 		User[] trainers = this.createPlayersOrTrainers(9, 1, Role.TRAINER);
-//		for (Training training : this.createTraining(trainers)) {
-//			map.put("tr" + training.getUser().getUsername(), token);
-//		}
+		this.createCourts(5, 1);
 		Calendar firstClassDate = Calendar.getInstance();
 		firstClassDate.add(Calendar.DAY_OF_YEAR, 1);
 		firstClassDate.set(Calendar.HOUR_OF_DAY, 9);
@@ -91,7 +89,7 @@ public class DaosService {
 				map.put("t" + token.getUser().getUsername(), token);
 			}
 			map.put(trainer.getUsername(), trainer);
-			trainingDao.save(new Training(trainer, firstClassDate, lastClassDate));
+			trainingDao.save(new Training(trainer, firstClassDate, lastClassDate, courtDao.findOne(4)));
 		}
 
 	}
