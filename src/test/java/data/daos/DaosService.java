@@ -91,6 +91,21 @@ public class DaosService {
 			map.put(trainer.getUsername(), trainer);
 			trainingDao.save(new Training(trainer, firstClassDate, lastClassDate, courtDao.findOne(4)));
 		}
+		
+		users = this.createPlayersOrTrainers(10, 4, Role.PLAYER);
+		for (User user : users) {
+			map.put(user.getUsername(), user);
+		}
+		for (Token token : this.createTokens(users)) {
+			Calendar currentTime = Calendar.getInstance();
+	        currentTime.add(Calendar.MINUTE, -70);
+	        token.setTokenCreationTime(currentTime.getTime());
+	        tokenDao.save(token);
+			map.put("t" + token.getUser().getUsername(), token);
+		}
+//		for (int i = 10; i < 14; i++) {
+//			
+//		}
 
 	}
 
