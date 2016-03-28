@@ -27,7 +27,7 @@ public class Training {
 	@JoinColumn
 	private User trainer;
 
-	private Calendar firtsClassDate;
+	private Calendar firstClassDate;
 
 	private Calendar lastClassDate;
 
@@ -41,10 +41,10 @@ public class Training {
 	public Training() {
 	}
 
-	public Training(User trainer, Calendar firtsClassDate, Calendar lastClassDate, Court court) {
+	public Training(User trainer, Calendar firstClassDate, Calendar lastClassDate, Court court) {
 		this.trainerName = trainer.getUsername();
 		this.trainer = trainer;
-		this.firtsClassDate = firtsClassDate;
+		this.firstClassDate = firstClassDate;
 		this.lastClassDate = lastClassDate;
 		this.court = court;
 		this.players = new ArrayList<User>(TOTAL_PLAYERS);
@@ -53,7 +53,7 @@ public class Training {
 	@Override
 	public String toString() {
 		return "Training [id=" + id + ", trainerName=" + trainerName + ", trainer=" + trainer + ", court=" + court
-				+ ", players=" + players + ", firtsClassDate=" + firtsClassDate + ", lastClassDate=" + lastClassDate
+				+ ", players=" + players + ", firstClassDate=" + firstClassDate + ", lastClassDate=" + lastClassDate
 				+ "]";
 	}
 
@@ -85,12 +85,12 @@ public class Training {
 		this.trainerName = trainer.getUsername();
 	}
 
-	public Calendar getFirtsClassDate() {
-		return firtsClassDate;
+	public Calendar getFirstClassDate() {
+		return firstClassDate;
 	}
 
-	public void setFirtsClassDate(Calendar firtsClassDate) {
-		this.firtsClassDate = firtsClassDate;
+	public void setFirstClassDate(Calendar firstClassDate) {
+		this.firstClassDate = firstClassDate;
 	}
 
 	public Calendar getLastClassDate() {
