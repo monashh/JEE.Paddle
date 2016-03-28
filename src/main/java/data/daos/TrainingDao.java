@@ -10,7 +10,7 @@ import data.entities.Court;
 import data.entities.Training;
 import data.entities.User;
 
-public interface TrainingDao extends JpaRepository<Training, Integer> {
+public interface TrainingDao extends JpaRepository<Training, Integer>, TrainingDaoExtended {
 
 	@Query("select training.trainer from Training training where training.trainerName = ?1")
 	public User findByTrainerName(String trainerName);
@@ -23,8 +23,5 @@ public interface TrainingDao extends JpaRepository<Training, Integer> {
 	
 	@Query("select training.trainer from Training training where ?1 member of training.players")
 	public User findTrainerByPlayer(User player);
-	
-	@Query("select training.players from Training training where ?1 member of training.players")
-	public List<User> findTrainingPlayers(User player);
 
 }

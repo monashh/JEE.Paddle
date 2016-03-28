@@ -4,8 +4,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
-import java.util.List;
-
+import org.junit.FixMethodOrder;
+import org.junit.runners.MethodSorters;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,11 +14,11 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import config.PersistenceConfig;
 import config.TestsPersistenceConfig;
-import data.entities.Training;
 import data.entities.User;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = { PersistenceConfig.class, TestsPersistenceConfig.class })
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class TrainingDaoITest {
 
 	@Autowired
@@ -31,7 +31,7 @@ public class TrainingDaoITest {
     private CourtDao courtDao;
 
 	@Test
-	public void testFindByTrainerName() {
+	public void testAfindByTrainerName() {
 
 		User trainer = (User) daosService.getMap().get("u9");
 		assertEquals(trainer, trainingDao.findByTrainerName("u9"));
@@ -39,17 +39,12 @@ public class TrainingDaoITest {
 	}
 	
 	@Test
-	public void testFindTrainerByCourt() {
+	public void testBfindTrainerByCourt() {
 		User trainer = (User) daosService.getMap().get("u9");
 		assertEquals(trainer, trainingDao.findTrainerByCourt(courtDao.findOne(4)));
 
 	}
 	
-//	@Test
-//	public void testCreateTraining(){
-//		List<Training> training = 
-////		Calendar firstClassDate
-//	}
 	
 //	@Test
 //	public void testFindTrainingsByFirstClassDate(){
@@ -58,14 +53,14 @@ public class TrainingDaoITest {
 //	}
 //	
 	@Test
-	public void testAddPlayerToTraining(){
+	public void testCaddPlayerToTraining(){
 		User player = (User) daosService.getMap().get("u2");
 		User trainer = (User) daosService.getMap().get("u9");
 		assertEquals(trainer, trainingDao.findTrainerByPlayer(player));
 	}
 	
 	@Test
-	public void testDeletePlayerFromTraining(){
+	public void testDremovePlayerFromTraining(){
 		User deletedPlayer = (User) daosService.getMap().get("u3");
 		assertNull(trainingDao.findTrainerByPlayer(deletedPlayer));
 		User signedUpPlayer = (User) daosService.getMap().get("u2");
@@ -73,10 +68,11 @@ public class TrainingDaoITest {
 		
 	}
 	
-//	@Test
-//	public void testDeleteTraining(){
-//		List<Training> training = 
-////		Calendar firstClassDate
-//	}
+	@Test
+	public void testEdeleteTraining(){
+		assertNotNull(trainingDao.findOne(1));
+		trainingDao.deleteTrainingById(1);
+		assertNull(trainingDao.findOne(1));
+	}
 	
 }
