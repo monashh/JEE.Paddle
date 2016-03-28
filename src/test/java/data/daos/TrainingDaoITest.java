@@ -26,9 +26,9 @@ public class TrainingDaoITest {
 
 	@Autowired
 	private DaosService daosService;
-	
+
 	@Autowired
-    private CourtDao courtDao;
+	private CourtDao courtDao;
 
 	@Test
 	public void testAfindByTrainerName() {
@@ -37,42 +37,35 @@ public class TrainingDaoITest {
 		assertEquals(trainer, trainingDao.findByTrainerName("u9"));
 
 	}
-	
+
 	@Test
 	public void testBfindTrainerByCourt() {
 		User trainer = (User) daosService.getMap().get("u9");
 		assertEquals(trainer, trainingDao.findTrainerByCourt(courtDao.findOne(4)));
 
 	}
-	
-	
-//	@Test
-//	public void testFindTrainingsByFirstClassDate(){
-//		List<Training> training = 
-////		Calendar firstClassDate
-//	}
-//	
+
 	@Test
-	public void testCaddPlayerToTraining(){
+	public void testCaddPlayerToTraining() {
 		User player = (User) daosService.getMap().get("u2");
 		User trainer = (User) daosService.getMap().get("u9");
 		assertEquals(trainer, trainingDao.findTrainerByPlayer(player));
 	}
-	
+
 	@Test
-	public void testDremovePlayerFromTraining(){
+	public void testDremovePlayerFromTraining() {
 		User deletedPlayer = (User) daosService.getMap().get("u3");
 		assertNull(trainingDao.findTrainerByPlayer(deletedPlayer));
 		User signedUpPlayer = (User) daosService.getMap().get("u2");
 		assertNotNull(trainingDao.findTrainerByPlayer(signedUpPlayer));
-		
+
 	}
-	
+
 	@Test
-	public void testEdeleteTraining(){
+	public void testZdeleteTraining() {
 		assertNotNull(trainingDao.findOne(1));
 		trainingDao.deleteTrainingById(1);
 		assertNull(trainingDao.findOne(1));
 	}
-	
+
 }

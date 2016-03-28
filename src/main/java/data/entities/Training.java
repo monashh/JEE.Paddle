@@ -16,7 +16,7 @@ import javax.persistence.ManyToOne;
 public class Training {
 
 	private final int TOTAL_PLAYERS = 4;
-	
+
 	@Id
 	@GeneratedValue
 	private int id;
@@ -108,12 +108,12 @@ public class Training {
 	public List<User> getPlayers() {
 		return players;
 	}
-	
-	public void addPlayer(User player){
+
+	public void addPlayer(User player) {
 		this.players.add(player);
 	}
-	
-	public void removePlayer(User player){
+
+	public void removePlayer(User player) {
 		this.players.remove(player);
 	}
 

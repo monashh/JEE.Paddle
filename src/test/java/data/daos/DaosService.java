@@ -60,15 +60,15 @@ public class DaosService {
 			map.put(user.getUsername(), user);
 		}
 		this.createCourts(1, 4);
-		Calendar date = this.createDate(1,9);
+		Calendar date = this.createDate(1, 9);
 		for (int i = 0; i < 4; i++) {
 			date.add(Calendar.HOUR_OF_DAY, 1);
 			reserveDao.save(new Reserve(courtDao.findOne(i + 1), users[i], date));
 		}
-		
+
 		User[] trainers = this.createPlayersOrTrainers(9, 1, Role.TRAINER);
 		this.createCourts(5, 1);
-		Calendar firstClassDate = this.createDate(1,9);
+		Calendar firstClassDate = this.createDate(1, 9);
 		Calendar lastClassDate = (Calendar) firstClassDate.clone();
 		lastClassDate.add(Calendar.WEEK_OF_YEAR, 4);
 		for (User trainer : trainers) {
@@ -85,18 +85,22 @@ public class DaosService {
 			training.removePlayer(users[3]);
 			trainingDao.save(training);
 		}
-		
+
 		users = this.createPlayersOrTrainers(10, 4, Role.PLAYER);
 		for (User user : users) {
 			map.put(user.getUsername(), user);
 		}
 		for (Token token : this.createTokens(users)) {
 			Calendar currentTime = Calendar.getInstance();
-	        currentTime.add(Calendar.MINUTE, -70);
-	        token.setTokenCreationTime(currentTime.getTime());
-	        tokenDao.save(token);
+			currentTime.add(Calendar.MINUTE, -70);
+			token.setTokenCreationTime(currentTime.getTime());
+			tokenDao.save(token);
 			map.put("t" + token.getUser().getUsername(), token);
 		}
+		for (Token token : this.createTokens(users)) {
+			map.put("t" + token.getUser().getUsername(), token);
+		}
+		
 
 	}
 
@@ -126,15 +130,15 @@ public class DaosService {
 			courtDao.save(new Court(id + initial));
 		}
 	}
-	
-	private Calendar createDate(int year, int day){
+
+	private Calendar createDate(int year, int day) {
 		Calendar date = Calendar.getInstance();
 		date.add(Calendar.DAY_OF_YEAR, year);
-        date.set(Calendar.HOUR_OF_DAY, day);
-        date.set(Calendar.MINUTE, 0);
-        date.set(Calendar.SECOND, 0);
-        date.set(Calendar.MILLISECOND, 0);
-        return date;
+		date.set(Calendar.HOUR_OF_DAY, day);
+		date.set(Calendar.MINUTE, 0);
+		date.set(Calendar.SECOND, 0);
+		date.set(Calendar.MILLISECOND, 0);
+		return date;
 	}
 
 	public Map<String, Object> getMap() {
