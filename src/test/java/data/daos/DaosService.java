@@ -46,8 +46,6 @@ public class DaosService {
 
 	private Map<String, Object> map;
 
-//	private Map<String, Object> mapa;
-
 	@PostConstruct
 	public void populate() {
 		map = new HashMap<>();
@@ -62,12 +60,7 @@ public class DaosService {
 			map.put(user.getUsername(), user);
 		}
 		this.createCourts(1, 4);
-		Calendar date = Calendar.getInstance();
-		date.add(Calendar.DAY_OF_YEAR, 1);
-		date.set(Calendar.HOUR_OF_DAY, 9);
-		date.set(Calendar.MINUTE, 0);
-		date.set(Calendar.SECOND, 0);
-		date.set(Calendar.MILLISECOND, 0);
+		Calendar date = this.createDate(1,9);
 		for (int i = 0; i < 4; i++) {
 			date.add(Calendar.HOUR_OF_DAY, 1);
 			reserveDao.save(new Reserve(courtDao.findOne(i + 1), users[i], date));
@@ -75,12 +68,7 @@ public class DaosService {
 		
 		User[] trainers = this.createPlayersOrTrainers(9, 1, Role.TRAINER);
 		this.createCourts(5, 1);
-		Calendar firstClassDate = Calendar.getInstance();
-		firstClassDate.add(Calendar.DAY_OF_YEAR, 1);
-		firstClassDate.set(Calendar.HOUR_OF_DAY, 9);
-		firstClassDate.set(Calendar.MINUTE, 0);
-		firstClassDate.set(Calendar.SECOND, 0);
-		firstClassDate.set(Calendar.MILLISECOND, 0);
+		Calendar firstClassDate = this.createDate(1,9);
 		Calendar lastClassDate = (Calendar) firstClassDate.clone();
 		lastClassDate.add(Calendar.WEEK_OF_YEAR, 4);
 		for (User trainer : trainers) {
@@ -89,7 +77,13 @@ public class DaosService {
 				map.put("t" + token.getUser().getUsername(), token);
 			}
 			map.put(trainer.getUsername(), trainer);
-			trainingDao.save(new Training(trainer, firstClassDate, lastClassDate, courtDao.findOne(4)));
+			Training training = new Training(trainer, firstClassDate, lastClassDate, courtDao.findOne(4));
+			for (int i = 0; i < 4; i++) {
+				training.addPlayer(users[i]);
+			}
+			trainingDao.save(training);
+			training.removePlayer(users[3]);
+			trainingDao.save(training);
 		}
 		
 		users = this.createPlayersOrTrainers(10, 4, Role.PLAYER);
@@ -103,9 +97,6 @@ public class DaosService {
 	        tokenDao.save(token);
 			map.put("t" + token.getUser().getUsername(), token);
 		}
-//		for (int i = 10; i < 14; i++) {
-//			
-//		}
 
 	}
 
@@ -134,6 +125,16 @@ public class DaosService {
 		for (int id = 0; id < size; id++) {
 			courtDao.save(new Court(id + initial));
 		}
+	}
+	
+	private Calendar createDate(int year, int day){
+		Calendar date = Calendar.getInstance();
+		date.add(Calendar.DAY_OF_YEAR, year);
+        date.set(Calendar.HOUR_OF_DAY, day);
+        date.set(Calendar.MINUTE, 0);
+        date.set(Calendar.SECOND, 0);
+        date.set(Calendar.MILLISECOND, 0);
+        return date;
 	}
 
 	public Map<String, Object> getMap() {

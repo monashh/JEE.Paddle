@@ -109,17 +109,12 @@ public class Training {
 		return players;
 	}
 	
-	public boolean addPlayer(User player){
-		if(this.players.size() < TOTAL_PLAYERS){
-			return this.players.add(player);
-		}
-		else{
-			return false;
-		}
+	public void addPlayer(User player){
+		this.players.add(player);
 	}
 	
-	public boolean removePlayer(User player){
-		return this.players.remove(player);
+	public void removePlayer(User player){
+		this.players.remove(player);
 	}
 
 }

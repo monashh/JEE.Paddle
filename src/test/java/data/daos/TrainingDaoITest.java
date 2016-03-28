@@ -1,6 +1,10 @@
 package data.daos;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+
+import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -10,6 +14,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import config.PersistenceConfig;
 import config.TestsPersistenceConfig;
+import data.entities.Training;
 import data.entities.User;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -39,4 +44,39 @@ public class TrainingDaoITest {
 		assertEquals(trainer, trainingDao.findTrainerByCourt(courtDao.findOne(4)));
 
 	}
+	
+//	@Test
+//	public void testCreateTraining(){
+//		List<Training> training = 
+////		Calendar firstClassDate
+//	}
+	
+//	@Test
+//	public void testFindTrainingsByFirstClassDate(){
+//		List<Training> training = 
+////		Calendar firstClassDate
+//	}
+//	
+	@Test
+	public void testAddPlayerToTraining(){
+		User player = (User) daosService.getMap().get("u2");
+		User trainer = (User) daosService.getMap().get("u9");
+		assertEquals(trainer, trainingDao.findTrainerByPlayer(player));
+	}
+	
+	@Test
+	public void testDeletePlayerFromTraining(){
+		User deletedPlayer = (User) daosService.getMap().get("u3");
+		assertNull(trainingDao.findTrainerByPlayer(deletedPlayer));
+		User signedUpPlayer = (User) daosService.getMap().get("u2");
+		assertNotNull(trainingDao.findTrainerByPlayer(signedUpPlayer));
+		
+	}
+	
+//	@Test
+//	public void testDeleteTraining(){
+//		List<Training> training = 
+////		Calendar firstClassDate
+//	}
+	
 }
