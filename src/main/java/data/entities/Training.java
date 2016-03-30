@@ -50,29 +50,6 @@ public class Training {
 		this.players = new ArrayList<User>(TOTAL_PLAYERS);
 	}
 
-	@Override
-	public String toString() {
-		return "Training [id=" + id + ", trainerName=" + trainerName + ", trainer=" + trainer + ", court=" + court
-				+ ", players=" + players + ", firstClassDate=" + firstClassDate + ", lastClassDate=" + lastClassDate
-				+ "]";
-	}
-
-	@Override
-	public int hashCode() {
-		return id;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (obj == null) {
-			return false;
-		} else if (getClass() != obj.getClass()) {
-			return false;
-		} else {
-			return id == ((Training) obj).id;
-		}
-	}
-
 	public int getId() {
 		return id;
 	}
@@ -117,4 +94,26 @@ public class Training {
 		this.players.remove(player);
 	}
 
+	@Override
+	public String toString() {
+		return "Training [id=" + id + ", trainerName=" + trainerName + ", trainer=" + trainer + ", court=" + court
+				+ ", players=" + players + ", firstClassDate=" + firstClassDate + ", lastClassDate=" + lastClassDate
+				+ "]";
+	}
+
+	@Override
+	public int hashCode() {
+		return id;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (obj == null) {
+			return false;
+		} else if (getClass() != obj.getClass()) {
+			return false;
+		} else {
+			return id == ((Training) obj).id;
+		}
+	}
 }

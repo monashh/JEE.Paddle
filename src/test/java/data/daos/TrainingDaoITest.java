@@ -4,6 +4,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
+import java.util.Calendar;
+
 import org.junit.FixMethodOrder;
 import org.junit.runners.MethodSorters;
 import org.junit.Test;
@@ -61,6 +63,18 @@ public class TrainingDaoITest {
 
 	}
 
+	@Test
+	public void testEfindTrainerByFirstClassDate() {
+		User trainer = trainingDao.findByTrainerName("u9");
+		Calendar date = Calendar.getInstance();
+		date.add(Calendar.DAY_OF_YEAR, 1);
+		date.set(Calendar.HOUR_OF_DAY, 9);
+		date.set(Calendar.MINUTE, 0);
+		date.set(Calendar.SECOND, 0);
+		date.set(Calendar.MILLISECOND, 0);
+		assertEquals(trainer, trainingDao.findTrainerByFirstClassDate(date));
+	}
+	
 	@Test
 	public void testZdeleteTraining() {
 		assertNotNull(trainingDao.findOne(1));

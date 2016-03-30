@@ -1,5 +1,7 @@
 package data.daos;
 
+import java.util.Calendar;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -17,5 +19,8 @@ public interface TrainingDao extends JpaRepository<Training, Integer>, TrainingD
 
 	@Query("select training.trainer from Training training where ?1 member of training.players")
 	public User findTrainerByPlayer(User player);
+	
+	@Query("select training.trainer from Training training where training.firstClassDate = ?1")
+	public User findTrainerByFirstClassDate(Calendar firstClassDate);
 
 }
