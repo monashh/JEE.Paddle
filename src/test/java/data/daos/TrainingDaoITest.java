@@ -76,6 +76,14 @@ public class TrainingDaoITest {
 	}
 	
 	@Test
+	public void testFfindTraininigIdByPlayer() {
+		int trainingId = 1;
+		User signedUpPlayer = (User) daosService.getMap().get("u2");
+		assertEquals(trainingDao.findTraininigIdByPlayer(signedUpPlayer), trainingId);
+
+	}
+	
+	@Test
 	public void testZdeleteTraining() {
 		assertNotNull(trainingDao.findOne(1));
 		trainingDao.deleteTrainingById(1);

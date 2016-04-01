@@ -10,6 +10,8 @@ import data.entities.Training;
 import data.entities.User;
 
 public interface TrainingDao extends JpaRepository<Training, Integer>, TrainingDaoExtended {
+	
+	Training findById(int id);
 
 	@Query("select training.trainer from Training training where training.trainerName = ?1")
 	public User findByTrainerName(String trainerName);
@@ -19,6 +21,9 @@ public interface TrainingDao extends JpaRepository<Training, Integer>, TrainingD
 
 	@Query("select training.trainer from Training training where ?1 member of training.players")
 	public User findTrainerByPlayer(User player);
+	
+	@Query("select training.id from Training training where ?1 member of training.players")
+	public int findTraininigIdByPlayer(User player);
 	
 	@Query("select training.trainer from Training training where training.firstClassDate = ?1")
 	public User findTrainerByFirstClassDate(Calendar firstClassDate);

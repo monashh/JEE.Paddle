@@ -7,21 +7,26 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import business.api.exceptions.AlreadyExistTrainingException;
 import business.api.exceptions.AlreadyExistUserFieldException;
 import business.api.exceptions.ApiException;
 import business.api.exceptions.ErrorMessage;
 import business.api.exceptions.InvalidCourtReserveException;
 import business.api.exceptions.InvalidDateException;
+import business.api.exceptions.InvalidTrainingRegisterationException;
 import business.api.exceptions.InvalidUserFieldException;
 import business.api.exceptions.MalformedHeaderException;
 import business.api.exceptions.UnauthorizedException;
 import business.api.exceptions.NotFoundUserIdException;
+import business.api.exceptions.NotFoundPlayerInTrainingException;
+import business.api.exceptions.NotFoundTrainingIdException;
+import business.api.exceptions.NotFoundCourtIdException;
 
 @ControllerAdvice
 public class ApiExceptionHandler {
 
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    @ExceptionHandler({NotFoundUserIdException.class})
+    @ExceptionHandler({NotFoundUserIdException.class, NotFoundPlayerInTrainingException.class, NotFoundTrainingIdException.class, NotFoundCourtIdException.class})
     @ResponseBody
     public ErrorMessage notFoundRequest(ApiException exception) {
         ErrorMessage apiErrorMessage = new ErrorMessage(exception);
@@ -36,7 +41,7 @@ public class ApiExceptionHandler {
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler({MalformedHeaderException.class, InvalidUserFieldException.class, InvalidDateException.class})
+    @ExceptionHandler({MalformedHeaderException.class, InvalidUserFieldException.class, InvalidDateException.class, InvalidTrainingRegisterationException.class})
     @ResponseBody
     public ErrorMessage badRequest(ApiException exception) {
         ErrorMessage apiErrorMessage = new ErrorMessage(exception);
@@ -44,7 +49,7 @@ public class ApiExceptionHandler {
     }
 
     @ResponseStatus(HttpStatus.CONFLICT)
-    @ExceptionHandler({AlreadyExistUserFieldException.class, AlreadyExistUserFieldException.class, InvalidCourtReserveException.class})
+    @ExceptionHandler({AlreadyExistUserFieldException.class, AlreadyExistUserFieldException.class, InvalidCourtReserveException.class, AlreadyExistTrainingException.class})
     @ResponseBody
     public ErrorMessage conflictRequest(ApiException exception) {
         ErrorMessage apiErrorMessage = new ErrorMessage(exception);

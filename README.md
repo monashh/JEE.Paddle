@@ -1,32 +1,8 @@
-# Tecnología Spring: Proyecto Padel
-#### Back-end con Tecnologías de Código Abierto (SPRING)
-#### [Máster en Ingeniería Web por la U.P.M.](http://miw.etsisi.upm.es)
+Nombre: Mona Mokhber
+Correo: mona.mokhber@alumnos.upm.es
 
-> Proyecto básicos para el uso de la tecnología Spring
+ECP1. Persistencia  -> Implementada
 
-### Tecnologías necesarias
-* Java
-* Spring
-* Eclipse
-* Maven
-* MySQL
-* Tomcat
+ECP1. Api   -> Solo el apartado B
 
-
-### Importar el proyecto mediante Eclipse
-1. Clonar mediante Eclipse este repositorio en la máquina local: https://youtu.be/rQNixJQQ25g
-1. Importar el repositorio clonado: https://youtu.be/yYvD8ZJtWwI
-1. Crear una Base de Datos llamada: `paddle`
-
-### Documentación
-#### Casos de Uso
-![Casos de uso](/docs/Paddle.UseCaseView.png "Casos de Uso")
-#### Arquitectura de paquetes
-![Casos de uso](/docs/Paddle.Architecture.png "Casos de Uso")
-#### Entidades
-![Casos de uso](/docs/Paddle.Entities.png "Casos de Uso")
-#### Daos
-![Casos de uso](/docs/Paddle.Daos.png "Casos de Uso")
-
-###### Autor: Jesús Bernal Bermúdez U.P.M.
-
+ECP1. Web   -> La pagina de inicio

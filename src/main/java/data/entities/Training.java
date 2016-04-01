@@ -61,6 +61,14 @@ public class Training {
 	public void setTrainerName(User trainer) {
 		this.trainerName = trainer.getUsername();
 	}
+	
+	public User getTrainer() {
+		return trainer;
+	}
+
+	public void setTrainer(User trainer) {
+		this.trainer = trainer;
+	}
 
 	public Calendar getFirstClassDate() {
 		return firstClassDate;
@@ -81,6 +89,10 @@ public class Training {
 	public Court getCourt() {
 		return court;
 	}
+	
+	public void setCourt(Court court) {
+		this.court = court;
+	}
 
 	public List<User> getPlayers() {
 		return players;
@@ -92,6 +104,10 @@ public class Training {
 
 	public void removePlayer(User player) {
 		this.players.remove(player);
+	}
+	
+	public int getSignedUpPlayersNum(){
+		return this.players.size();
 	}
 
 	@Override
@@ -116,4 +132,5 @@ public class Training {
 			return id == ((Training) obj).id;
 		}
 	}
+
 }

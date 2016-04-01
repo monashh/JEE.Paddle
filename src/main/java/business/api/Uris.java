@@ -6,6 +6,8 @@ public class Uris {
 
     public static final String ID = "/{id}";
     
+    public static final String NAME = "/{name}";
+    
     public static final String ADMINS = "/admins";
     
     public static final String USERS = "/users";
@@ -19,5 +21,11 @@ public class Uris {
     public static final String RESERVES = "/reserves";
     
     public static final String AVAILABILITY = "/availability";
+    
+    public static final String TRAININGS = "/trainings";
+    
+    public static final String NEW_TRAINING = "/newTraining";
+    
+    public static final String SCHEDULE = "/schedule";
 
 }
